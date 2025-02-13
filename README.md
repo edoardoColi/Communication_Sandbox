@@ -90,14 +90,15 @@ In addition to its network emulation capabilities, Mininet also provides support
 In order to build a custom network topology I used Mininet  and Python tools; in front of all to run the program we need to install those dependencies:
 ```
 sudo -v
-sudo apt install python3 python3-pip openvswitch-testcontroller mininet;
+sudo apt install python3 python3-pip python3-venv openvswitch-testcontroller mininet;
 pip3 install --upgrade pip;
-pip3 install mininet colorama configparser ryu pillow pox matplotlib;
+pip3 install mininet colorama configparser pillow pox matplotlib ryu;
 ```
 The *MininetNetPractice.py* program showcases the ability to parse and extract data from the configuration file to define the desired network topology. Using the Mininet API, the program reads and parses the *MininetTopo.conf* file, which contains information about the network topology. By leveraging the parsed data, the program creates a virtual network with the desired topology, replicating the specified network configuration. This allows for the creation of custom and complex network scenarios tailored to specific research or testing requirements.  
 Referring to a random topology, like the one in the figure below, we can create a configuration file that brings back exactly these parameters within the Mininet topology in order to interact with them. The configuration file *MininetTopo.conf* represents it. Some notes for the creation are reported there as a structure model, together with some constraints to be respected. Another important aspect to allow the network to function is to manage the routers routing table(**TODO inside MininetTopo.conf**).
 <img src=https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/images/MininetConf/topology.jpeg width="105%" height="105%">  
 I tested the mininet emulation software to reproduce a real situation of a cluster. Within this [file.pdf](https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/docs/MininetConf/researchReport.pdf) it is possible to view all my comparison analysis and the conclusions I have reached.  
+Additionally, a scientific paper has been sent for publication approval, offering a more in-depth analysis, that can be reed [here](https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/docs/MininetConf/researchPropose.pdf). To reproduce the paper environment is possible to use *MininetComparativeAnalysis.py* doing `sudo python3 MininetComparativeAnalysis.py`
 
 ## 5G Network simulation
 For emulating and testing a 5G Network we are going to use ComNetsEmu, a testbed and network emulator designed for the NFV/SDN teaching book "Computing in Communication Networks: From Theory to Practice".  
