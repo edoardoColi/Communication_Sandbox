@@ -49,19 +49,19 @@ By leveraging the capabilities of Bash and TShark, the MAC Packet Analyzer scrip
 ./MACshuffle.sh -h
 ```
 Below we find some execution references:  
-<img src=https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/images/MACshuffle/analyze_file.png width="105%" height="105%">  
+<img src=./images/MACshuffle/analyze_file.png width="105%" height="105%">  
 *Expected output for analyzing a capture file passed to the program in differents ways.*  
 <br>
 <br>
-<img src=https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/images/MACshuffle/unicity_bounded_test.png width="105%" height="105%">  
+<img src=./images/MACshuffle/unicity_bounded_test.png width="105%" height="105%">  
 *Expected output for performing the same analysis as before but with combination of unicity flag and n flag to bound the number of packets analyzed.*  
 <br>
 <br>
-<img src=https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/images/MACshuffle/versose_test.png width="105%" height="105%">  
+<img src=./images/MACshuffle/versose_test.png width="105%" height="105%">  
 *Expected output for running the analysis using the verbose flag. More details are shown regarding the counts.*  
 <br>
 <br>
-<img src=https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/images/MACshuffle/verbose_unicity_test.png width="105%" height="105%">  
+<img src=./images/MACshuffle/verbose_unicity_test.png width="105%" height="105%">  
 *Expected output for running the same analysis but accounting for duplicates.*  
   
 To perform a stream data analysis in a certain interface we can use the following command (in this case it's necessary to have tcpdump).
@@ -96,7 +96,7 @@ pip3 install mininet colorama configparser pillow pox matplotlib ryu;
 ```
 The *MininetNetPractice.py* program showcases the ability to parse and extract data from the configuration file to define the desired network topology. Using the Mininet API, the program reads and parses the *MininetTopo.conf* file, which contains information about the network topology. By leveraging the parsed data, the program creates a virtual network with the desired topology, replicating the specified network configuration. This allows for the creation of custom and complex network scenarios tailored to specific research or testing requirements.  
 Referring to a random topology, like the one in the figure below, we can create a configuration file that brings back exactly these parameters within the Mininet topology in order to interact with them. The configuration file *MininetTopo.conf* represents it. Some notes for the creation are reported there as a structure model, together with some constraints to be respected. Another important aspect to allow the network to function is to manage the routers routing table(**TODO inside MininetTopo.conf**).
-<img src=https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/images/MininetConf/topology.jpeg width="105%" height="105%">  
+<img src=./images/MininetConf/topology.jpeg width="105%" height="105%">  
 I tested the mininet emulation software to reproduce a real situation of a cluster. Within this [file.pdf](https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/docs/MininetConf/researchReport.pdf) it is possible to view all my comparison analysis and the conclusions I have reached.  
 Additionally, a scientific paper has been sent for publication approval, offering a more in-depth analysis, that can be reed [here](https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/docs/MininetConf/researchPropose.pdf). To reproduce the paper environment is possible to use *MininetComparativeAnalysis.py* doing `sudo python3 MininetComparativeAnalysis.py`
 
@@ -164,7 +164,7 @@ Some of the important ones are:
 ### Example Overview
 The 5G architecture is designed to be more flexible, scalableand adaptable to the needs of various applications and services. Here we have the key components of the 5G architecture.  
 
-<img src=https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/images/5Gnetwork/5G_architecture.jpg width=1000px></img>
+<img src=./images/5Gnetwork/5G_architecture.jpg width=1000px></img>
 
 **Acronymes list:**
 - *User Equipement* _ UE
@@ -185,7 +185,7 @@ For the 5G Core Network we are going to use [OPEN5gs](https://github.com/open5gs
 In the context of alternatives [OpenAirInterface](https://github.com/openairinterface) presents itself as another viable option, both for [RAN](https://openairinterface.org/oai-5g-ran-project/) and [Core](https://openairinterface.org/oai-5g-core-network-project/).  
 The testing scenario includes 5 DockerHosts as shown in the figure below. The UE starts two PDU session one for each slice defined in the core network.  
 
-<img src=https://github.com/edoardoColi/5G_Sandbox/blob/edoardoColi/images/5Gnetwork/5G_topology.jpg width=1000px></img>
+<img src=./images/5Gnetwork/5G_topology.jpg width=1000px></img>
 
 *upf_mec*: Represents the user-plane functionalities in the multi-edge cloud, simulating near-edge scenarios with low latency.  
 *upf_cld*: Simulates the cloud environment, characterized by higher latency.  
