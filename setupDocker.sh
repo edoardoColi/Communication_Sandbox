@@ -36,19 +36,25 @@ if [[ ! "$confirmation" =~ ^[Nn]|[Nn][Oo]$ ]]; then
 			make
 
 		echo -e "${BLUE}Adding Docker's official GPG key${DEFAULT}"
-			sudo mkdir -m 0755 -p /etc/apt/keyrings
-			curl -fsSL  https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+			sudo install -m 0755 -d /etc/apt/keyrings
+			sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+			sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-			echo \
-			"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-			$(. /etc/os-release && echo $VERSION_CODENAME) stable" | \
-			sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+		echo -e "${BLUE}Add the repository to Apt sources${DEFAULT}"
+			sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 
 			sudo apt-get update -y
 			sudo apt-get install -y \
 				docker-ce \
 				docker-ce-cli \
 				containerd.io \
+				docker-buildx-plugin \
 				docker-compose-plugin \
 				docker-compose
 
