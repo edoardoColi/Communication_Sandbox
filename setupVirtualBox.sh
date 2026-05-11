@@ -23,7 +23,7 @@ else
 	echo "You choose no"
 fi
 
-echo -e "${YELLOW}Do you want to Install VirtualBox-7.0?: [Y/n]${DEFAULT}"
+echo -e "${YELLOW}Do you want to Install VirtualBox-7.2?: [Y/n]${DEFAULT}"
 read -r confirmation
 if [[ ! "$confirmation" =~ ^[Nn]|[Nn][Oo]$ ]]; then
 	echo "Installing..."
@@ -35,23 +35,28 @@ if [[ ! "$confirmation" =~ ^[Nn]|[Nn][Oo]$ ]]; then
 			lsb-release \
 
 		echo -e "${BLUE}Adding Docker's official GPG key${DEFAULT}"
-			wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --yes --dearmor -o /usr/share/keyrings/oracle-virtualbox-2016.gpg
+			wget -qO - https://www.virtualbox.org/download/oracle_vbox_2016.asc | gpg --dearmor | sudo tee /etc/apt/keyrings/oracle-virtualbox-2016.gpg -
 
-			echo \
-			"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian \
-			$(. /etc/os-release && echo $VERSION_CODENAME) contrib" | \
-			sudo tee /etc/apt/sources.list.d/virtualbox.list > /dev/null
+		echo -e "${BLUE}Add the repository to Apt sources${DEFAULT}"
+			sudo tee /etc/apt/sources.list.d/virtualbox.sources <<EOF
+Types: deb
+URIs: https://download.virtualbox.org/virtualbox/debian
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: contrib
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/oracle-virtualbox-2016.gpg
+EOF
 
 			sudo apt-get update -y
 			sudo apt-get install -y \
 				linux-headers-$(uname -r) \
-				dkms \
-				virtualbox-7.0
+				virtualbox-7.2 \
+				dkms
 
 		echo -e "${BLUE}Make VirtualBox run with Extension Pack${DEFAULT}"
-			wget https://download.virtualbox.org/virtualbox/7.0.14/Oracle_VM_VirtualBox_Extension_Pack-7.0.14.vbox-extpack
-			sudo vboxmanage extpack install --replace --accept-license=33d7284dc4a0ece381196fda3cfe2ed0e1e8e7ed7f27b9a9ebc4ee22e24bd23c Oracle_VM_VirtualBox_Extension_Pack-7.0.14.vbox-extpack
-			rm -f Oracle_VM_VirtualBox_Extension_Pack-7.0.14.vbox-extpack
+			wget https://download.virtualbox.org/virtualbox/7.2.8/Oracle_VirtualBox_Extension_Pack-7.2.8.vbox-extpack
+			sudo vboxmanage extpack install --replace --accept-license=$(sha256sum Oracle_VirtualBox_Extension_Pack-7.2.8.vbox-extpack | awk '{print $1}') Oracle_VirtualBox_Extension_Pack-7.2.8.vbox-extpack
+			rm -f Oracle_VirtualBox_Extension_Pack-7.2.8.vbox-extpack
 
 		echo -e "${BLUE}Make VirtualBox run with admin privileges${DEFAULT}"
 			sudo groupadd vboxusers

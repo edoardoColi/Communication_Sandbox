@@ -14,7 +14,7 @@ class MyRouter (Node):
 		self.cmd('sysctl net.ipv4.ip_forward=1')		#Enable forwarding on the router
 	def terminate(self):
 		self.cmd('sysctl net.ipv4.ip_forward=0')		#Disable forwarding on the router
-		super(MyRouter, self).terminate
+		super(MyRouter, self).terminate()
 
 def build_topology(config_file):
 	topo = Topo()
